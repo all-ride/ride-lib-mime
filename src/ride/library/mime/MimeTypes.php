@@ -75,7 +75,10 @@ class MimeTypes {
             return $default;
         }
 
-        return $this->mediaTypes[$mediaType];
+        $extension = $this->mediaTypes[$mediaType];
+        $extension = array_shift($extension);
+
+        return $extension;
     }
 
     /**
