@@ -25,7 +25,7 @@ class MimeService {
 
     /**
      * MIME sniffer for files and strings
-     * @var ride\library\mime\sniffer\MimeSniffer
+     * @var \ride\library\mime\sniffer\MimeSniffer
      */
     protected $mimeSniffer;
 
@@ -93,7 +93,7 @@ class MimeService {
      * string if detected, null otherwise
      */
     public function getMediaTypeForString($string) {
-        return $this->getMediaType($this->mimeSniffer->getMediaTypeForString($file));
+        return $this->getMediaType($this->mimeSniffer->getMediaTypeForString($string));
     }
 
     /**
