@@ -23,6 +23,7 @@ abstract class AbstractMimeSnifferTest extends PHPUnit_Framework_TestCase {
         return array(
             array('image/jpeg', __DIR__ . '/../../../../../data/lake.jpg'),
             array('text/x-php', __DIR__ . '/../../../../../data/test.pdf'),
+            array('image/svg+xml', __DIR__ . '/../../../../../data/bike.svg'),
         );
     }
 
