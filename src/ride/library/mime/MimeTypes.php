@@ -62,7 +62,6 @@ class MimeTypes {
         return $this->mediaTypes;
     }
 
-
     /**
      * Gets the extension for the provided media type
      * @param string $mediaType
