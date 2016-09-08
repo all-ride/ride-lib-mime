@@ -2,6 +2,8 @@
 
 namespace ride\library\mime;
 
+use ride\library\mime\exception\MimeException;
+
 /**
  * Factory to create instances from the MIME library
  */
@@ -21,7 +23,12 @@ class MimeFactory {
      * @return MimeTypes
      */
     public function createMimeTypesFromFile($file) {
-        return $this->createMimeTypesFromString(file_get_contents($file));
+        $string = @file_get_contents($file);
+        if ($string === false) {
+            throw new MimeException('Could not create mime types from file: ' . $file . ' does not exist or cannot be read');
+        }
+
+        return $this->createMimeTypesFromString($string);
     }
 
     /**
