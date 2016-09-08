@@ -13,5 +13,11 @@
             "ride\\library\\mime\\": ["src/"],
             "ride\\service\\MimeService": ["src/"]
         }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "ride\\library\\mime\\": ["test/src/"],
+            "ride\\service\\MimeService": ["test/src/"]
+        }
     }
 }
