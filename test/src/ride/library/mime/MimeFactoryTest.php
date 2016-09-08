@@ -6,10 +6,26 @@ use \PHPUnit_Framework_TestCase;
 
 class MimeFactoryTest extends PHPUnit_Framework_TestCase {
 
-    public function testCreateMimeTypesFromString() {
-        $mimeFactory = new MimeFactory();
+    public function setUp() {
+        $this->mimeFactory = new MimeFactory();
+    }
 
-        $mimeTypes = $mimeFactory->createMimeTypesFromString(
+    public function testCreateMimeTypes() {
+        $mimeTypes = $this->mimeFactory->createMimeTypes();
+
+        $this->assertNotNull($mimeTypes);
+        $this->assertTrue($mimeTypes instanceof MimeTypes);
+    }
+
+    /**
+     * @expectedException ride\library\mime\exception\MimeException
+     */
+    public function testCreateMimeTypesFromFileThrowExceptionWhenInvalidFileProvided() {
+        $this->mimeFactory->createMimeTypesFromFile('/my/unexistant/file');
+    }
+
+    public function testCreateMimeTypesFromString() {
+        $mimeTypes = $this->mimeFactory->createMimeTypesFromString(
 "# comment
 video/3gpp					3gp
 video/annodex axv
@@ -53,10 +69,9 @@ video/mpeg mpeg mpg mpe
      * @dataProvider providerCreateMediaTypeFromString
      */
     public function testCreateMediaTypeFromString($expected) {
-        $mimeFactory = new MimeFactory();
+        $result = $this->mimeFactory->createMediaTypeFromString($expected);
 
-        $result = $mimeFactory->createMediaTypeFromString($expected);
-
+        $this->assertTrue($result instanceof MediaType);
         $this->assertEquals($expected, (string) $result);
     }
 
