@@ -6,9 +6,9 @@ use ride\library\mime\sniffer\FinfoMimeSniffer;
 use ride\library\mime\MediaType;
 use ride\library\mime\MimeFactory;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class MimeServiceTest extends PHPUnit_Framework_TestCase {
+class MimeServiceTest extends TestCase {
 
     public function setUp() {
         $mimeFactory = new MimeFactory();
@@ -16,6 +16,18 @@ class MimeServiceTest extends PHPUnit_Framework_TestCase {
         $mimeSniffer = new FinfoMimeSniffer();
 
         $this->mimeService = new MimeService($mimeFactory, $mimeTypes, $mimeSniffer);
+    }
+
+    public function testGetMimeTypes() {
+        $mediaType = $this->mimeService->getMediaType('text/plain');
+
+        $this->assertInstanceOf('ride\library\mime\MimeTypes', $this->mimeService->getMimeTypes());
+    }
+
+    public function testGetMediaTypeShouldReturnNull() {
+        $mediaType = $this->mimeService->getMediaType('text/plain');
+
+        $this->assertNull($this->mimeService->getMediaType(null));
     }
 
     public function testGetMediaType() {

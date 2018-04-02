@@ -2,9 +2,9 @@
 
 namespace ride\library\mime\sniffer;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-abstract class AbstractMimeSnifferTest extends PHPUnit_Framework_TestCase {
+abstract class AbstractMimeSnifferTest extends TestCase {
 
     abstract protected function getMimeSniffer();
 
