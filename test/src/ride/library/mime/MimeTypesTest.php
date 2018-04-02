@@ -2,9 +2,15 @@
 
 namespace ride\library\mime;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class MimeTypesTest extends PHPUnit_Framework_TestCase {
+class MimeTypesTest extends TestCase {
+
+    public function testGetExtensionShouldReturnDefaultValue() {
+        $mimeTypes = new MimeTypes();
+
+        $this->assertSame('txt', $mimeTypes->getExtension(null, 'txt'));
+    }
 
     public function testSetMediaType() {
         $mimeTypes = new MimeTypes();

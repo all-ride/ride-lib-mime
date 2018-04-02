@@ -2,12 +2,16 @@
 
 namespace ride\library\mime;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class MimeFactoryTest extends PHPUnit_Framework_TestCase {
+class MimeFactoryTest extends TestCase {
 
     public function setUp() {
         $this->mimeFactory = new MimeFactory();
+    }
+
+    public function testCreateMediaTypeFromStringShouldReturnNull() {
+        $this->assertNull($this->mimeFactory->createMediaTypeFromString(null));
     }
 
     public function testCreateMimeTypes() {
@@ -71,7 +75,7 @@ video/mpeg mpeg mpg mpe
     public function testCreateMediaTypeFromString($expected) {
         $result = $this->mimeFactory->createMediaTypeFromString($expected);
 
-        $this->assertTrue($result instanceof MediaType);
+        $this->assertInstanceOf('ride\library\mime\MediaType', $result);
         $this->assertEquals($expected, (string) $result);
     }
 
@@ -81,6 +85,25 @@ video/mpeg mpeg mpg mpe
             array('text/html; charset=UTF-8'),
             array('text/plain'),
         );
+    }
+
+    public function testCreateMediaTypeFromStringOnParameters() {
+        $result = $this->mimeFactory->createMediaTypeFromString('image/jpg; name="myFile"; filename="img.jpg"');
+
+        $this->assertSame('image/jpg; name=myFile', (string) $result);
+    }
+
+    public function testCreateMediaTypeFromStringOnMediaTypeParameter() {
+        $result = $this->mimeFactory->createMediaTypeFromString('text/plain; filename');
+
+        $this->assertSame('text/plain; filename=1', (string) $result);
+    }
+
+    /**
+     * @expectedException ride\library\mime\exception\MimeException
+     */
+    public function testCreateMediaTypeFromStringShouldThrowMimeException() {
+        $result = $this->mimeFactory->createMediaTypeFromString(';');
     }
 
 }
