@@ -9,6 +9,7 @@ use ride\library\mime\exception\MimeException;
  */
 class FinfoMimeSniffer implements MimeSniffer {
 
+    protected $finfo;
     /**
      * Constructs a new MIME sniffer
      */
